@@ -10,6 +10,7 @@ public class BaseCharacter : MonoBehaviour
     private const uint  b_maxLifePoint = 5;
     private const float b_movementSpeed = 5f;
     private const uint  b_maxDashNumber = 1;
+    private const bool  b_canDoubleJump = false;
 
     private const uint  b_damage = 1;
     private const float b_range = 4;
@@ -21,36 +22,33 @@ public class BaseCharacter : MonoBehaviour
     Passive actualPassive;
 
     // UpdatedValues
-    private uint  u_maxLifePoint = b_maxLifePoint;
-    private float u_movementSpeed = b_movementSpeed;
-    private uint  u_maxDashNumber = b_maxDashNumber;
+    public uint  maxLifePoint = b_maxLifePoint;
+    public float movementSpeed = b_movementSpeed;
+    public uint  maxDashNumber = b_maxDashNumber;
+    public bool  canDoubleJump = b_canDoubleJump;
 
-    private uint  u_damage = b_damage;
-    private float u_range = b_range;
-    private float u_areaOfEffectSize = b_areaOfEffectSize;
-    private float u_criticalChance = b_criticalChance;
+    public uint  damage = b_damage;
+    public float range = b_range;
+    public float areaOfEffectSize = b_areaOfEffectSize;
+    public float criticalChance = b_criticalChance;
 
     // Others
     public uint actualLifePoint;
     public uint actualDashNumber;
 
-    public Rigidbody2D rigidBody;
-    private Vector2 movementDirection;
 
     // Start is called before the first frame update
     void Start()
     {
         passivePool = new List<Passive>()
         {
-            new SpeedPassive(), new DamagePassive(), new MaxHealthPassive()
+            new DoubleJumpPassive(), new SpeedPassive()
         };
 
         actualPassive = passivePool.First();
 
-        actualLifePoint = u_maxLifePoint;
-        actualDashNumber = u_maxDashNumber;
-
-        movementDirection = new Vector2();
+        actualLifePoint = maxLifePoint;
+        actualDashNumber = maxDashNumber;
 
         UpdateVariables();
 
@@ -58,33 +56,29 @@ public class BaseCharacter : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        movementDirection.x = Input.GetAxisRaw("Horizontal");
-        movementDirection.y = Input.GetAxisRaw("Vertical");
-    }
-
     void FixedUpdate()
     {
-        rigidBody.MovePosition(rigidBody.position + movementDirection * u_movementSpeed * Time.fixedDeltaTime);
+      
     }
 
     // Update statistic with the passive values
     void UpdateVariables()
     {
-        u_maxLifePoint = actualPassive.MaxLifePoint ?? b_maxLifePoint;
-        u_movementSpeed = actualPassive.MovementSpeed ?? b_movementSpeed;
-        u_maxDashNumber = actualPassive.MaxDashNumber ?? b_maxDashNumber;
+        maxLifePoint = actualPassive.MaxLifePoint ?? b_maxLifePoint;
+        movementSpeed = actualPassive.MovementSpeed ?? b_movementSpeed;
+        maxDashNumber = actualPassive.MaxDashNumber ?? b_maxDashNumber;
+        canDoubleJump = actualPassive.CanDoubleJump ?? b_canDoubleJump;
 
-        u_damage = actualPassive.Damage ?? b_damage;
-        u_range = actualPassive.Range ?? b_range;
-        u_areaOfEffectSize = actualPassive.AreaOfEffectSize ?? b_areaOfEffectSize;
-        u_criticalChance = actualPassive.CriticalChance ?? b_criticalChance;
+        damage = actualPassive.Damage ?? b_damage;
+        range = actualPassive.Range ?? b_range;
+        areaOfEffectSize = actualPassive.AreaOfEffectSize ?? b_areaOfEffectSize;
+        criticalChance = actualPassive.CriticalChance ?? b_criticalChance;
+        
     }
 
     public uint GetMaxLifePoint()
     {
-        return u_maxLifePoint;
+        return maxLifePoint;
     }
 
     // Call every 10 seconds 
