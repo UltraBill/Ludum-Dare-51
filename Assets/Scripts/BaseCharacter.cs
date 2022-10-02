@@ -32,7 +32,7 @@ public class BaseCharacter : MonoBehaviour
     [NonSerialized] public float criticalChance = b_criticalChance;
 
     // Attack
-    const float m_HitRadius = .4f;
+    [SerializeField] private float m_HitRadius = .4f;
 
     [SerializeField] private Transform m_EnemyHitCheck;
     [SerializeField] private LayerMask m_WhatIsEnemy;
@@ -42,6 +42,7 @@ public class BaseCharacter : MonoBehaviour
     private float nextAttackTimer;
     private float beginCharged;
     private bool isCharging;
+    private bool notifyEndCharge = false;
 
     // Dash 
 
@@ -79,9 +80,12 @@ public class BaseCharacter : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            m_Animator.ResetTrigger("Notification");
             m_Animator.ResetTrigger("Attack");
+            m_Animator.ResetTrigger("HeavyAttack");
             if (Time.time >= nextAttackTimer)
             {
+                notifyEndCharge = true;
                 isCharging = true;
                 beginCharged = Time.time;
 
@@ -95,6 +99,7 @@ public class BaseCharacter : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1") && Time.time >= nextAttackTimer && isCharging)
         {
+            notifyEndCharge = false;
             isCharging = false;
             nextAttackTimer = Time.time + m_cooldown;
 
@@ -106,6 +111,11 @@ public class BaseCharacter : MonoBehaviour
             {
                 Attack();
             }
+        }
+
+        if (Time.time >= beginCharged + m_chargedAttackTimer && notifyEndCharge)
+        {
+            m_Animator.SetTrigger("Notification");
         }
 
         // Dash
@@ -171,8 +181,13 @@ public class BaseCharacter : MonoBehaviour
     void Attack(bool isHeavy = false)
     {
         // Animator
+        m_Animator.ResetTrigger("Notification");
         m_Animator.ResetTrigger("HoldAttack");
-        m_Animator.SetTrigger("Attack");
+
+        if (isHeavy)
+            m_Animator.SetTrigger("HeavyAttack");
+        else
+            m_Animator.SetTrigger("Attack");
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_EnemyHitCheck.position, m_HitRadius, m_WhatIsEnemy);
 
