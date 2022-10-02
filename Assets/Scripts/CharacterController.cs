@@ -19,8 +19,9 @@ namespace Assets.Scripts
         private Animator m_Animator;
 
         private float movementDirection;
-        private int numberJump;
-        private int numberDash;
+        private int maxJump;
+        private int usedJump;
+
         private bool isJumping;
         private bool m_animJumping;
         private bool flipped;
@@ -30,17 +31,15 @@ namespace Assets.Scripts
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
             m_Character = GetComponent<BaseCharacter>();
             m_Animator = GetComponent<Animator>();
-
-            numberJump = 1 + (m_Character.canDoubleJump ? 1 : 0);
         }
 
         void Update()
         {
+            maxJump = 1 + (m_Character.canDoubleJump ? 1 : 0);
             movementDirection = Input.GetAxisRaw("Horizontal");
 
-            if (Input.GetButtonDown("Jump") && numberJump > 0)
+            if (Input.GetButtonDown("Jump") && usedJump < maxJump)
             {
-                numberJump--;
                 isJumping = true;
             }
         }
@@ -53,12 +52,10 @@ namespace Assets.Scripts
 
             if (colliders.Any())
             {
-                numberJump = (1 + (m_Character.canDoubleJump ? 1 : 0));
-            }
-            else
-            {
-                if (m_animJumping) m_animJumping = false;
-                numberJump = (m_Character.canDoubleJump ? 1 : 0);
+                usedJump = 0;
+
+                if (m_animJumping) 
+                    m_animJumping = false;
             }
 
             // Move the player
@@ -70,6 +67,7 @@ namespace Assets.Scripts
                 m_animJumping = true;
 
                 m_Rigidbody2D.AddForce(Vector2.up * m_jumpForce, ForceMode2D.Impulse);
+                usedJump++;
             }
 
             // Animator 
