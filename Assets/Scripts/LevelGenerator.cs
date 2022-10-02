@@ -9,13 +9,14 @@ namespace Assets.Scripts
 
         public GameObject baseRoom;
         public uint numOfRoom = 10;
+        [SerializeField] public float step;
 
         private void Start()
         {
 
             LevelPart lp = baseRoom.GetComponent<LevelPart>();
 
-            Vector2 nextPos = new Vector2(17.5f, 0);
+            Vector2 nextPos = new Vector2(step, 0);
 
             for (int i = 0; i < numOfRoom; i++)
             {
@@ -26,7 +27,7 @@ namespace Assets.Scripts
                     Instantiate(nextRoom, nextPos, Quaternion.identity);
 
                     lp = nextRoom.GetComponent<LevelPart>();
-                    nextPos.x += 17.5f;
+                    nextPos.x += step;
                 }
             }
         }
