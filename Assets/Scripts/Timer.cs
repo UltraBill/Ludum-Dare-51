@@ -38,7 +38,7 @@ public class Timer : MonoBehaviour
 
         var rect = segment.GetComponent<RectTransform>();
 
-        rect.anchoredPosition = new Vector2((isLeft ? -1 : 1) * (i + 1) * 50, 70);
+        rect.anchoredPosition = new Vector2((isLeft ? -1 : 1) * (i + 1) * 50, -70);
 
         if (isLeft)
             rect.rotation = Quaternion.Euler(0f, 180f, 0f);

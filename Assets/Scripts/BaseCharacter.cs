@@ -6,7 +6,6 @@ using UnityEngine;
 public class BaseCharacter : MonoBehaviour
 {
     // Base values
-    private const uint b_maxLifePoint = 5;
     private const float b_movementSpeed = 5f;
     private const uint b_maxDashNumber = 1;
     private const bool b_canDoubleJump = false;
@@ -21,7 +20,6 @@ public class BaseCharacter : MonoBehaviour
     Passive actualPassive;
 
     // UpdatedValues
-    public uint maxLifePoint = b_maxLifePoint;
     public float movementSpeed = b_movementSpeed;
     public uint maxDashNumber = b_maxDashNumber;
     public bool canDoubleJump = b_canDoubleJump;
@@ -44,7 +42,6 @@ public class BaseCharacter : MonoBehaviour
     private bool isCharging;
 
     // Others
-    public uint actualLifePoint;
     public uint actualDashNumber;
     private Animator m_Animator;
 
@@ -58,7 +55,6 @@ public class BaseCharacter : MonoBehaviour
 
         actualPassive = passivePool.First();
 
-        actualLifePoint = maxLifePoint;
         actualDashNumber = maxDashNumber;
 
         m_Animator = GetComponent<Animator>();
@@ -104,7 +100,6 @@ public class BaseCharacter : MonoBehaviour
     // Update statistic with the passive values
     void UpdateVariables()
     {
-        maxLifePoint = actualPassive.MaxLifePoint ?? b_maxLifePoint;
         movementSpeed = actualPassive.MovementSpeed ?? b_movementSpeed;
         maxDashNumber = actualPassive.MaxDashNumber ?? b_maxDashNumber;
         canDoubleJump = actualPassive.CanDoubleJump ?? b_canDoubleJump;
@@ -114,11 +109,6 @@ public class BaseCharacter : MonoBehaviour
         areaOfEffectSize = actualPassive.AreaOfEffectSize ?? b_areaOfEffectSize;
         criticalChance = actualPassive.CriticalChance ?? b_criticalChance;
 
-    }
-
-    public uint GetMaxLifePoint()
-    {
-        return maxLifePoint;
     }
 
     public void ChangePassive()
