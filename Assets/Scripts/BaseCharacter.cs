@@ -1,4 +1,6 @@
 using Assets.Scripts.Passive;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,7 +9,7 @@ public class BaseCharacter : MonoBehaviour
 {
     // Base values
     private const float b_movementSpeed = 5f;
-    private const uint b_maxDashNumber = 1;
+    private const int b_maxDashNumber = 1;
     private const bool b_canDoubleJump = false;
 
     private const uint b_damage = 1;
@@ -20,14 +22,14 @@ public class BaseCharacter : MonoBehaviour
     Passive actualPassive;
 
     // UpdatedValues
-    public float movementSpeed = b_movementSpeed;
-    public uint maxDashNumber = b_maxDashNumber;
-    public bool canDoubleJump = b_canDoubleJump;
+    [NonSerialized] public float movementSpeed = b_movementSpeed;
+    [NonSerialized] public int  maxDashNumber = b_maxDashNumber;
+    [NonSerialized] public bool canDoubleJump = b_canDoubleJump;
 
-    public uint damage = b_damage;
-    public float range = b_range;
-    public float areaOfEffectSize = b_areaOfEffectSize;
-    public float criticalChance = b_criticalChance;
+    [NonSerialized] public uint  damage = b_damage;
+    [NonSerialized] public float range = b_range;
+    [NonSerialized] public float areaOfEffectSize = b_areaOfEffectSize;
+    [NonSerialized] public float criticalChance = b_criticalChance;
 
     // Attack
     const float m_HitRadius = .4f;
@@ -41,9 +43,18 @@ public class BaseCharacter : MonoBehaviour
     private float beginCharged;
     private bool isCharging;
 
+    // Dash 
+
+    [SerializeField] private float m_dashCooldown = 1f;
+    [SerializeField] private float m_dashForce = 50f;
+
+    private bool canDash = true;
+    private float startedDash;
+    private int actualDashNumber;
+
     // Others
-    public uint actualDashNumber;
     private Animator m_Animator;
+    private Assets.Scripts.CharacterController m_Controller;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +69,7 @@ public class BaseCharacter : MonoBehaviour
         actualDashNumber = maxDashNumber;
 
         m_Animator = GetComponent<Animator>();
+        m_Controller = GetComponent<Assets.Scripts.CharacterController>();
 
         UpdateVariables();
     }
@@ -77,7 +89,6 @@ public class BaseCharacter : MonoBehaviour
             }
             else if (!isCharging)
             {
-
                 beginCharged = Time.time + 99999999f;
             }
         }
@@ -90,11 +101,37 @@ public class BaseCharacter : MonoBehaviour
             if (Time.time > beginCharged + m_chargedAttackTimer)
             {
                 Attack(true);
-            } else
+            }
+            else
             {
                 Attack();
             }
         }
+
+        // Dash
+        if (Input.GetButtonDown("Fire2") && actualDashNumber > 0 && canDash)
+        {
+            canDash = false;
+            actualDashNumber--;
+            startedDash = Time.time;
+
+            StartCoroutine(Dash());
+        }
+
+        if (Time.time > startedDash + m_dashCooldown)
+        {
+            canDash = true;
+        }
+
+    }
+
+    private IEnumerator Dash()
+    {
+        movementSpeed *= m_dashForce;
+
+        yield return new WaitForSeconds(0.25f);
+
+        movementSpeed = actualPassive.MovementSpeed ?? b_movementSpeed;
     }
 
     // Update statistic with the passive values
@@ -108,14 +145,13 @@ public class BaseCharacter : MonoBehaviour
         range = actualPassive.Range ?? b_range;
         areaOfEffectSize = actualPassive.AreaOfEffectSize ?? b_areaOfEffectSize;
         criticalChance = actualPassive.CriticalChance ?? b_criticalChance;
-
     }
 
     public void ChangePassive()
     {
-        int r = Random.Range(0, passivePool.Count);
+        actualDashNumber = maxDashNumber;
 
-        Debug.Log(r);
+        int r = UnityEngine.Random.Range(0, passivePool.Count);
 
         actualPassive = passivePool[r];
 

@@ -10,7 +10,7 @@ namespace Assets.Scripts.Passive
     {
         public uint?  MaxLifePoint { get; internal set; }
         public float? MovementSpeed { get; internal set; }
-        public uint?  MaxDashNumber { get; internal set; }
+        public int?  MaxDashNumber { get; internal set; }
         public bool? CanDoubleJump { get; internal set; }
 
         public uint?  Damage { get; internal set; }
