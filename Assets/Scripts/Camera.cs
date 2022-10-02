@@ -15,3 +15,4 @@ public class Camera : MonoBehaviour
         transform.position = smoothPos;
     }
 }
+
