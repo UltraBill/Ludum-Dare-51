@@ -522,7 +522,7 @@ AudioSource:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8256284437847350934, guid: 70021f95a1ca88f49ac133a50756e103, type: 2}
   m_audioClip: {fileID: 8300000, guid: b64228398fe81ce43b01a5bfc2e0674c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.25
@@ -618,7 +618,7 @@ AudioSource:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5407723263209228453, guid: 70021f95a1ca88f49ac133a50756e103, type: 2}
   m_audioClip: {fileID: 8300000, guid: 45e1786ac80fc4a4abb52921566067a8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.314
@@ -6634,6 +6634,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1279101974, guid: 6cbf6f8f1c2353749a33200724089ec9, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -5407723263209228453, guid: 70021f95a1ca88f49ac133a50756e103, type: 2}
     - target: {fileID: 1373445950337822901, guid: 6cbf6f8f1c2353749a33200724089ec9, type: 3}
       propertyPath: m_dashForce
       value: 3
