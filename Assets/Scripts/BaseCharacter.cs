@@ -64,8 +64,6 @@ public class BaseCharacter : MonoBehaviour
         m_Animator = GetComponent<Animator>();
 
         UpdateVariables();
-
-        InvokeRepeating(nameof(ChangePassive), 0f, 10f);
     }
 
     // Update is called once per frame
@@ -123,18 +121,13 @@ public class BaseCharacter : MonoBehaviour
         return maxLifePoint;
     }
 
-    // Call every 10 seconds 
-    private void ChangePassive()
+    public void ChangePassive()
     {
-        Debug.Log(passivePool.Count);
-
         int r = Random.Range(0, passivePool.Count);
 
         Debug.Log(r);
 
         actualPassive = passivePool[r];
-
-        Debug.Log(actualPassive);
 
         UpdateVariables();
 
@@ -150,7 +143,6 @@ public class BaseCharacter : MonoBehaviour
 
         foreach (Collider2D enemy in colliders)
         {
-
             Debug.Log(damage * (uint)(isHeavy ? 4 : 1));
 
             enemy.GetComponent<BaseEnemy>()?.TakeDamage((int)damage * (isHeavy ? 4 : 1));
