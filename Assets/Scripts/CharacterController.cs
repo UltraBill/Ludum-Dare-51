@@ -17,6 +17,7 @@ namespace Assets.Scripts
         private Rigidbody2D m_Rigidbody2D;
         private BaseCharacter m_Character;
         private Animator m_Animator;
+        private AudioSource m_source;
 
         private float movementDirection;
         private int maxJump;
@@ -31,6 +32,7 @@ namespace Assets.Scripts
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
             m_Character = GetComponent<BaseCharacter>();
             m_Animator = GetComponent<Animator>();
+            m_source = GetComponent<AudioSource>();
         }
 
         void Update()
@@ -73,6 +75,22 @@ namespace Assets.Scripts
             // Animator 
             m_Animator.SetFloat("Speed", Math.Abs(movementDirection));
             m_Animator.SetBool("Jumping", m_animJumping);
+
+            if (Math.Abs(movementDirection) > 0)
+            {
+                if (!m_source.isPlaying)
+                {
+                    if (!m_animJumping)
+                        m_source.Play();
+                }
+
+                if (m_animJumping) m_source.Stop();
+            }else {
+                if (m_source.isPlaying)
+                {
+                    m_source.Stop();
+                }
+            }
 
             // Turn the player
             if (movementDirection < -0.1 && !flipped)

@@ -56,6 +56,7 @@ public class BaseCharacter : MonoBehaviour
     // Others
     private Animator m_Animator;
     private Assets.Scripts.CharacterController m_Controller;
+    private AudioSource m_source;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +72,7 @@ public class BaseCharacter : MonoBehaviour
 
         m_Animator = GetComponent<Animator>();
         m_Controller = GetComponent<Assets.Scripts.CharacterController>();
+        m_source = GetComponents<AudioSource>()[1];
 
         UpdateVariables();
     }
@@ -183,6 +185,7 @@ public class BaseCharacter : MonoBehaviour
         // Animator
         m_Animator.ResetTrigger("Notification");
         m_Animator.ResetTrigger("HoldAttack");
+        m_source.Play();
 
         if (isHeavy)
             m_Animator.SetTrigger("HeavyAttack");
