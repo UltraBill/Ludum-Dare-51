@@ -127,11 +127,20 @@ public class BaseCharacter : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        CapsuleCollider2D col = GetComponent<CapsuleCollider2D>();
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
         movementSpeed *= m_dashForce;
+        col.enabled = false;
+        rb.gravityScale = 0.1f;
+
+        rb.velocity = new Vector2(rb.velocity.x, 0);
 
         yield return new WaitForSeconds(0.25f);
 
         movementSpeed = actualPassive.MovementSpeed ?? b_movementSpeed;
+        col.enabled = true;
+        rb.gravityScale = 4f;
     }
 
     // Update statistic with the passive values
