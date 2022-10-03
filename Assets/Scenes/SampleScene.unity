@@ -1312,7 +1312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007aa928fd0d1aa4d9b3cb03330b0f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLifePoint: 10
+  maxLifePoint: 20
   m_TargetDetectionRadius: 6
   m_WhatIsTarget:
     serializedVersion: 2
