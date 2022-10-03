@@ -57,6 +57,8 @@ public class BaseBoss : MonoBehaviour
     private Animator animator;
     private Rigidbody2D m_Rigidbody2D;
     private int jumpcount;
+    private int delayToAttack = 50;
+    private int delayToAttackCount = 0;
 
     // Passives list
     List<Passive> passivePool;
@@ -88,6 +90,7 @@ public class BaseBoss : MonoBehaviour
     {
         animator.SetTrigger("Damage");
         actualLifePoint -= damage;
+        delayToAttackCount = delayToAttack;
 
         if (actualLifePoint <= 0)
         {
@@ -148,10 +151,13 @@ public class BaseBoss : MonoBehaviour
                 }
             }
             
-            if ( attackPlayer.Any() && !isAttacking)
+            if ( attackPlayer.Any() && !isAttacking && delayToAttackCount <= 0)
             {
                 isAttacking = true;
                 Invoke("Attack", m_attackChargeTime);
+            }else if(delayToAttackCount > 0)
+            {
+                delayToAttackCount--;
             }
 
             // Turn the enemy in the right direction

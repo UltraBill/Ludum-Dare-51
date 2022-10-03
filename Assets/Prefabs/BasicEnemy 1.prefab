@@ -111,6 +111,7 @@ MonoBehaviour:
   m_attackChargeTime: 0.5
   m_HitPoint: {fileID: 4975393845932777372}
   m_HitRadius: 0.7
+  delayToAttack: 50
 --- !u!50 &2946268359332706028
 Rigidbody2D:
   serializedVersion: 4
