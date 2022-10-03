@@ -166,7 +166,6 @@ public class BaseBoss : MonoBehaviour
 
     private void Attack()
     {
-        animator.SetTrigger("HoldAttack");
         animator.SetTrigger("Attack");
 
         Collider2D[] attackedPlayer = Physics2D.OverlapCircleAll(m_HitPoint.position, m_HitRadius, m_WhatIsTarget);

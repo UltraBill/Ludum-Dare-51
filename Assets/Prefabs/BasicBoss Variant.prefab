@@ -41,11 +41,27 @@ PrefabInstance:
     - target: {fileID: 2946268359332706025, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1821843916, guid: 2f6ea60af17840a4db489b2df2d94880, type: 3}
+      objectReference: {fileID: 562629963, guid: a4841d04d9c427840ac0a1538d095dcb, type: 3}
+    - target: {fileID: 2946268359332706025, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946268359332706025, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946268359332706025, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946268359332706025, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2946268359332706025, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 2946268359332706027, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_Name
       value: BasicBoss Variant
@@ -133,7 +149,7 @@ PrefabInstance:
     - target: {fileID: 2946268359332706034, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 162fd2f7ce8ecd04f9888ee68872242c, type: 2}
+      objectReference: {fileID: 9100000, guid: 6e89c43f00b62be4e8e1a567dfc13e54, type: 2}
     m_RemovedComponents:
     - {fileID: 2946268359332706024, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
