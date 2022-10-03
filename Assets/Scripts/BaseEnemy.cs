@@ -18,12 +18,14 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] private float m_attackChargeTime = 0.5f;
     [SerializeField] private Transform m_HitPoint;
     [SerializeField] private float m_HitRadius;
+    [SerializeField] private int delayToAttack;
 
     private bool isDead;
     private bool isAttacking;
     private bool flipped;
     private Vector3 direction;
     private Animator animator;
+    private int hitcountAtk = 0;
 
     void Start()
     {
@@ -34,6 +36,7 @@ public class BaseEnemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         actualLifePoint -= damage;
+        hitcountAtk = delayToAttack;
 
         if (actualLifePoint <= 0)
         {
@@ -72,10 +75,13 @@ public class BaseEnemy : MonoBehaviour
                 transform.position = dest;
             }
             
-            if ( attackPlayer.Any() && !isAttacking && !isDead)
+            if ( attackPlayer.Any() && !isAttacking && !isDead && hitcountAtk <= 0)
             {
                 isAttacking = true;
                 Invoke("Attack", m_attackChargeTime);
+            }else if(hitcountAtk > 0)
+            {
+                hitcountAtk--;
             }
 
             // Turn the enemy in the right direction

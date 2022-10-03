@@ -67,6 +67,10 @@ PrefabInstance:
       value: BasicBoss Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2946268359332706027, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946268359332706027, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_TagString
       value: Bossu
       objectReference: {fileID: 0}
@@ -108,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2946268359332706030, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.93
+      value: -16.5
       objectReference: {fileID: 0}
     - target: {fileID: 2946268359332706030, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_LocalPosition.y
