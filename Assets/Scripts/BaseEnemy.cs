@@ -37,7 +37,8 @@ public class BaseEnemy : MonoBehaviour
 
         if (actualLifePoint <= 0)
         {
-            Death();
+            if (!isDead)
+                Death();
         }
     }
 
@@ -45,8 +46,7 @@ public class BaseEnemy : MonoBehaviour
     {
         isDead = true;
         
-        animator.SetTrigger("Death");
-        Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        animator.SetBool("Death", true);
     }
 
     public void FixedUpdate()
@@ -72,7 +72,7 @@ public class BaseEnemy : MonoBehaviour
                 transform.position = dest;
             }
             
-            if ( attackPlayer.Any() && !isAttacking)
+            if ( attackPlayer.Any() && !isAttacking && !isDead)
             {
                 isAttacking = true;
                 Invoke("Attack", m_attackChargeTime);

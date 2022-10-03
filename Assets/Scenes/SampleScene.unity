@@ -1439,6 +1439,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tooltip
       objectReference: {fileID: 0}
+    - target: {fileID: 2044657847678103162, guid: 82368467ed2051144b649b5306929ccf, type: 3}
+      propertyPath: m_TagString
+      value: Tooltip
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82368467ed2051144b649b5306929ccf, type: 3}
 --- !u!1001 &2946268358179303842
@@ -1451,10 +1455,6 @@ PrefabInstance:
     - target: {fileID: 2946268359332706027, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_Name
       value: BasicEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 2946268359332706028, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
-      propertyPath: m_Constraints
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2946268359332706030, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_RootOrder
@@ -1511,7 +1511,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6474966687612172733, guid: 519d11d44a389534090b2059d3347956, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.98
+      value: -4.01
       objectReference: {fileID: 0}
     - target: {fileID: 6474966689358366724, guid: 519d11d44a389534090b2059d3347956, type: 3}
       propertyPath: target
