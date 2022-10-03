@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private GameObject m_Parent;
     [SerializeField] private GameObject m_Segment;
     [SerializeField] private GameObject m_BaseCharacter;
+    [SerializeField] private GameObject m_BaseBoss;
 
     [Header("Passive Display")]
     [SerializeField] private GameObject m_PassiveDisplayer;
@@ -84,6 +85,10 @@ public class Timer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 m_BaseCharacter.GetComponent<BaseCharacter>().ChangePassive();
 
                 DisplayPassive();
+            }
+            if (m_BaseBoss)
+            {
+                m_BaseBoss.GetComponent<BaseBoss>().ChangePassive();
             }
         }
 
