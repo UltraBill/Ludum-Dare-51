@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tooltip
   - Bossu
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -107,6 +107,10 @@ namespace Assets.Scripts
                     flipped = false;
                 }
             }
+            else
+            {
+                m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
+            }
         }
 
         private void OnDrawGizmos()
