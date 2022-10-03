@@ -23,6 +23,9 @@ public class BaseBoss : MonoBehaviour
     [SerializeField] private Transform m_HitPoint;
     [SerializeField] private float m_HitRadius;
 
+    [Header("Reward")]
+    [SerializeField] private GameObject m_reward;
+
     [Header("Base Values")]
     public const float b_movementSpeed = 7f;
     public const int b_maxDashNumber = 1;
@@ -89,7 +92,14 @@ public class BaseBoss : MonoBehaviour
         isDead = true;
         
         animator.SetBool("isDead", true);
-        Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        Instantiate(m_reward, transform.position, Quaternion.identity);
+    }
+
+    public void AddPassivePool(Passive passive)
+    {
+        passivePool.Add(passive);
+
+        Debug.Log("Boss Passives : " + passivePool.Count);
     }
 
     public void FixedUpdate()
