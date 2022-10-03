@@ -23,17 +23,21 @@ public class InteractionMenu : MonoBehaviour
         
     }
 
+    public void CloseOptMenu()
+    {
+        if (m_optOpened)
+        {
+            m_optOpened = false;
+            m_optMenu.SetActive(m_optOpened);
+            m_char.SetActive(!m_optOpened);
+        }   
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (m_optOpened)
         {
-            if (Input.GetButtonDown("Cancel"))
-            {
-                m_optOpened = false;
-                m_optMenu.SetActive(m_optOpened);
-                m_char.SetActive(!m_optOpened);
-            }
         }
         else 
         {
