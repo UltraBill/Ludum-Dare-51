@@ -1312,7 +1312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007aa928fd0d1aa4d9b3cb03330b0f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLifePoint: 10
+  maxLifePoint: 20
   m_TargetDetectionRadius: 6
   m_WhatIsTarget:
     serializedVersion: 2
@@ -1467,7 +1467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2946268359332706030, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2946268359332706030, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_LocalPosition.x

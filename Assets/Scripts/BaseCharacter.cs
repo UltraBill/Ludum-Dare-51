@@ -220,6 +220,7 @@ public class BaseCharacter : MonoBehaviour
         foreach (Collider2D enemy in colliders)
         {
             enemy.GetComponent<BaseEnemy>()?.TakeDamage((int)damage * (isHeavy ? 2 : 1));
+            enemy.GetComponent<BaseBoss>()?.TakeDamage((int)damage * (isHeavy ? 2 : 1));
         }
     }
 
