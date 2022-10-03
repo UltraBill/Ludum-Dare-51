@@ -8,14 +8,17 @@ using UnityEngine;
 public class BaseCharacter : MonoBehaviour
 {
     // Base values
-    private const float b_movementSpeed = 5f;
-    private const int b_maxDashNumber = 1;
-    private const bool b_canDoubleJump = false;
-
-    private const uint b_damage = 1;
-    private const float b_range = 4;
-    private const float b_areaOfEffectSize = 0;
-    private const float b_criticalChance = 0.1f;
+    [Header("Base Values")]
+    public const float b_movementSpeed = 7f;
+    public const int b_maxDashNumber = 1;
+    public const bool b_canDoubleJump = false;
+  
+    public const int b_damage = 2;
+    public const int b_heavyDamageMultiplicator = 2;
+    public const int b_armorPoint = 2;
+    public const float b_range = 4;
+    public const float b_areaOfEffectSize = 0;
+    public const float b_criticalChance = 0.1f;
 
     // Passives list
     List<Passive> passivePool;
@@ -23,17 +26,20 @@ public class BaseCharacter : MonoBehaviour
 
     // UpdatedValues
     [NonSerialized] public float movementSpeed = b_movementSpeed;
-    [NonSerialized] public int  maxDashNumber = b_maxDashNumber;
     [NonSerialized] public bool canDoubleJump = b_canDoubleJump;
+    [NonSerialized] public int maxDashNumber = b_maxDashNumber;
+    [NonSerialized] public int armorPoint = b_armorPoint;
 
-    [NonSerialized] public uint  damage = b_damage;
+
+    [NonSerialized] public int damage = b_damage;
+    [NonSerialized] public int heavyDamageMultiplicator = b_heavyDamageMultiplicator;
     [NonSerialized] public float range = b_range;
     [NonSerialized] public float areaOfEffectSize = b_areaOfEffectSize;
     [NonSerialized] public float criticalChance = b_criticalChance;
 
     // Attack
+    [Header("Attack")]
     [SerializeField] private float m_HitRadius = .4f;
-
     [SerializeField] private Transform m_EnemyHitCheck;
     [SerializeField] private LayerMask m_WhatIsEnemy;
     [SerializeField] private float m_cooldown = 0.5f;
@@ -42,6 +48,7 @@ public class BaseCharacter : MonoBehaviour
     private float nextAttackTimer;
     private float beginCharged;
     private bool isCharging;
+    private bool isDashing;
     private bool notifyEndCharge = false;
 
     // Dash 
@@ -57,6 +64,8 @@ public class BaseCharacter : MonoBehaviour
     private Animator m_Animator;
     private Assets.Scripts.CharacterController m_Controller;
     private AudioSource m_source;
+
+    [NonSerialized] public bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -80,61 +89,69 @@ public class BaseCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (!isDead)
         {
-            m_Animator.ResetTrigger("Notification");
-            m_Animator.ResetTrigger("Attack");
-            m_Animator.ResetTrigger("HeavyAttack");
-            if (Time.time >= nextAttackTimer)
+            if (Input.GetButtonDown("Fire1"))
             {
-                notifyEndCharge = true;
-                isCharging = true;
-                beginCharged = Time.time;
+                m_Animator.ResetTrigger("Notification");
+                m_Animator.ResetTrigger("Attack");
+                m_Animator.ResetTrigger("HeavyAttack");
+                if (Time.time >= nextAttackTimer)
+                {
+                    notifyEndCharge = true;
+                    isCharging = true;
+                    beginCharged = Time.time;
 
-                m_Animator.SetTrigger("HoldAttack");
+                    m_Animator.SetTrigger("HoldAttack");
+                }
+                else if (!isCharging)
+                {
+                    beginCharged = Time.time + 99999999f;
+                }
             }
-            else if (!isCharging)
+
+            if (Input.GetButtonUp("Fire1") && Time.time >= nextAttackTimer && isCharging)
             {
-                beginCharged = Time.time + 99999999f;
+                notifyEndCharge = false;
+                isCharging = false;
+                nextAttackTimer = Time.time + m_cooldown;
+
+                if (Time.time > beginCharged + m_chargedAttackTimer)
+                {
+                    Attack(true);
+                }
+                else
+                {
+                    Attack();
+                }
             }
-        }
 
-        if (Input.GetButtonUp("Fire1") && Time.time >= nextAttackTimer && isCharging)
-        {
-            notifyEndCharge = false;
-            isCharging = false;
-            nextAttackTimer = Time.time + m_cooldown;
-
-            if (Time.time > beginCharged + m_chargedAttackTimer)
+            if (Time.time >= beginCharged + m_chargedAttackTimer && notifyEndCharge)
             {
-                Attack(true);
+                m_Animator.SetTrigger("Notification");
             }
-            else
+
+            // Dash
+            if (Input.GetButtonDown("Fire2") && actualDashNumber > 0 && canDash)
             {
-                Attack();
+                canDash = false;
+                actualDashNumber--;
+                startedDash = Time.time;
+
+                StartCoroutine(Dash());
+            }
+
+            if (Time.time > startedDash + m_dashCooldown)
+            {
+                canDash = true;
+            }
+
+            // if out of bound, die
+            if (transform.position.y < -10f)
+            {
+                isDead = true;
             }
         }
-
-        if (Time.time >= beginCharged + m_chargedAttackTimer && notifyEndCharge)
-        {
-            m_Animator.SetTrigger("Notification");
-        }
-
-        // Dash
-        if (Input.GetButtonDown("Fire2") && actualDashNumber > 0 && canDash)
-        {
-            canDash = false;
-            actualDashNumber--;
-            startedDash = Time.time;
-
-            StartCoroutine(Dash());
-        }
-
-        if (Time.time > startedDash + m_dashCooldown)
-        {
-            canDash = true;
-        }
-
     }
 
     private IEnumerator Dash()
@@ -163,6 +180,7 @@ public class BaseCharacter : MonoBehaviour
         canDoubleJump = actualPassive.CanDoubleJump ?? b_canDoubleJump;
 
         damage = actualPassive.Damage ?? b_damage;
+        heavyDamageMultiplicator = actualPassive.HeavyDamageMultiplicator ?? b_heavyDamageMultiplicator;
         range = actualPassive.Range ?? b_range;
         areaOfEffectSize = actualPassive.AreaOfEffectSize ?? b_areaOfEffectSize;
         criticalChance = actualPassive.CriticalChance ?? b_criticalChance;
@@ -196,9 +214,24 @@ public class BaseCharacter : MonoBehaviour
 
         foreach (Collider2D enemy in colliders)
         {
-            Debug.Log(damage * (uint)(isHeavy ? 4 : 1));
+            enemy.GetComponent<BaseEnemy>()?.TakeDamage((int)damage * (isHeavy ? 2 : 1));
+        }
+    }
 
-            enemy.GetComponent<BaseEnemy>()?.TakeDamage((int)damage * (isHeavy ? 4 : 1));
+    public void Damage()
+    {
+        if (!isDashing)
+        {
+            if (armorPoint > 0)
+            {
+                armorPoint--;
+                m_Animator.SetTrigger("Damage");
+            }
+            else
+            {
+                m_Animator.SetBool("isDead", true);
+                isDead = true;
+            }
         }
     }
 

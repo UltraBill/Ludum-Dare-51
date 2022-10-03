@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -48,60 +47,64 @@ namespace Assets.Scripts
 
         private void FixedUpdate()
         {
-
-            // Check if Grounded
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, m_GroundedRadius, m_WhatIsGround);
-
-            if (colliders.Any())
+            if (!m_Character.isDead)
             {
-                usedJump = 0;
+                // Check if Grounded
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, m_GroundedRadius, m_WhatIsGround);
 
-                if (m_animJumping) 
-                    m_animJumping = false;
-            }
-
-            // Move the player
-            m_Rigidbody2D.velocity = new Vector2(movementDirection * m_Character.movementSpeed, m_Rigidbody2D.velocity.y);
-
-            if (isJumping)
-            {
-                isJumping = false;
-                m_animJumping = true;
-
-                m_Rigidbody2D.AddForce(Vector2.up * m_jumpForce, ForceMode2D.Impulse);
-                usedJump++;
-            }
-
-            // Animator 
-            m_Animator.SetFloat("Speed", Math.Abs(movementDirection));
-            m_Animator.SetBool("Jumping", m_animJumping);
-
-            if (Math.Abs(movementDirection) > 0)
-            {
-                if (!m_source.isPlaying)
+                if (colliders.Any())
                 {
-                    if (!m_animJumping)
-                        m_source.Play();
+                    usedJump = 0;
+
+                    if (m_animJumping)
+                        m_animJumping = false;
                 }
 
-                if (m_animJumping) m_source.Stop();
-            }else {
-                if (m_source.isPlaying)
-                {
-                    m_source.Stop();
-                }
-            }
+                // Move the player
+                m_Rigidbody2D.velocity = new Vector2(movementDirection * m_Character.movementSpeed, m_Rigidbody2D.velocity.y);
 
-            // Turn the player
-            if (movementDirection < -0.1 && !flipped)
-            {
-                transform.rotation = Quaternion.Euler(transform.rotation.x, 180, transform.rotation.z);
-                flipped = true;
-            }
-            else if (movementDirection > 0.1 && flipped)
-            {
-                transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
-                flipped = false;
+                if (isJumping)
+                {
+                    isJumping = false;
+                    m_animJumping = true;
+
+                    m_Rigidbody2D.AddForce(Vector2.up * m_jumpForce, ForceMode2D.Impulse);
+                    usedJump++;
+                }
+
+                // Animator 
+                m_Animator.SetFloat("Speed", Math.Abs(movementDirection));
+                m_Animator.SetBool("Jumping", m_animJumping);
+
+                if (Math.Abs(movementDirection) > 0)
+                {
+                    if (!m_source.isPlaying)
+                    {
+                        if (!m_animJumping)
+                            m_source.Play();
+                    }
+
+                    if (m_animJumping) m_source.Stop();
+                }
+                else
+                {
+                    if (m_source.isPlaying)
+                    {
+                        m_source.Stop();
+                    }
+                }
+
+                // Turn the player
+                if (movementDirection < -0.1 && !flipped)
+                {
+                    transform.rotation = Quaternion.Euler(transform.rotation.x, 180, transform.rotation.z);
+                    flipped = true;
+                }
+                else if (movementDirection > 0.1 && flipped)
+                {
+                    transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
+                    flipped = false;
+                }
             }
         }
 
