@@ -29,8 +29,8 @@ public class RewardScript : MonoBehaviour
                     boss.GetComponent<BaseBoss>().AddPassivePool(r3.passive);
                 }
                 isUsed = true;
-                Debug.Log(this.gameObject.name);
                 this.gameObject.SetActive(false);
+                GameObject.Find("GameMaster").GetComponent<GameMasterScript>().Reset();
                 Destroy(this);
             }
             else if (!r2.gameObject.activeSelf)
@@ -42,8 +42,8 @@ public class RewardScript : MonoBehaviour
                     boss.GetComponent<BaseBoss>().AddPassivePool(r3.passive);
                 }
                 isUsed = true;
-                Debug.Log(this.gameObject.name);
                 this.gameObject.SetActive(false);
+                GameObject.Find("GameMaster").GetComponent<GameMasterScript>().Reset();
                 Destroy(this);
             }
             else if (!r3.gameObject.activeSelf)
@@ -55,8 +55,8 @@ public class RewardScript : MonoBehaviour
                     boss.GetComponent<BaseBoss>().AddPassivePool(r1.passive);
                 }
                 isUsed = true;
-                Debug.Log(this.gameObject.name);
                 this.gameObject.SetActive(false);
+                GameObject.Find("GameMaster").GetComponent<GameMasterScript>().Reset();
                 Destroy(this);
             }
         }

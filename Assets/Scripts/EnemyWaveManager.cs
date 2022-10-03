@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyWaveManager : MonoBehaviour
 {
+    public BaseBoss boss;
     public int numberMaxEnemy = 5;
     public int maxEnemyAtSameTime = 2;
 
@@ -16,8 +17,10 @@ public class EnemyWaveManager : MonoBehaviour
 
     void Start()
     {
+        boss.gameObject.SetActive(false);
         numberMaxEnemy = Random.Range(15, 20);
         maxEnemyAtSameTime = 3;
+        bossGenerated = false;
 
         numberGenerated = 0;
     }
@@ -41,8 +44,25 @@ public class EnemyWaveManager : MonoBehaviour
             if (bossPool.Any())
             {
                 bossGenerated = true;
-                Instantiate(bossPool[Random.Range(0, bossPool.Count)], transform.position, Quaternion.identity);
+                boss.gameObject.SetActive(true);
+                boss.transform.position = transform.position;
+                Debug.Log("Spawn Boss");
+
+                //Instantiate(bossPool[Random.Range(0, bossPool.Count)], transform.position, Quaternion.identity);
             }
         }
+    }
+
+    public void Reset()
+    {
+        numberMaxEnemy = Random.Range(15, 20);
+        maxEnemyAtSameTime = 3;
+
+        numberGenerated = 0;
+        bossGenerated = false;
+        boss.Reset();
+        boss.gameObject.SetActive(false);
+
+        Debug.Log("Reset SpawnManager");
     }
 }

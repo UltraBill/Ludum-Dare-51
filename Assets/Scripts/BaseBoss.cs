@@ -72,8 +72,16 @@ public class BaseBoss : MonoBehaviour
         {
             new SpeedPassive(), new DoubleJumpPassive(),
         };
+        Reset();
+    }
 
+    public void Reset()
+    {
+        actualLifePoint = maxLifePoint;
         actualPassive = passivePool.First();
+        isDead = false;
+        isAttacking = false;
+        m_Rigidbody2D.velocity = new Vector2(0, 0);
     }
 
     public void TakeDamage(int damage)
