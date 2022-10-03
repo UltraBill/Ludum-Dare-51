@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Passive
 {
@@ -11,6 +7,7 @@ namespace Assets.Scripts.Passive
         public SpeedPassive()
         {
             MovementSpeed = 10f;
+            sprite = Resources.Load<Sprite>("Passif/p_speed");
         }
 
         public override void AdditionalEffect()

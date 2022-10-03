@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Passive
 {
     public abstract class Passive
     {
-        public uint?  MaxLifePoint { get; internal set; }
+        protected Sprite sprite;
+
+        public uint? MaxLifePoint { get; internal set; }
         public float? MovementSpeed { get; internal set; }
-        public int?  MaxDashNumber { get; internal set; }
+        public int? MaxDashNumber { get; internal set; }
         public bool? CanDoubleJump { get; internal set; }
 
         public int? Damage { get; internal set; }
@@ -22,5 +20,9 @@ namespace Assets.Scripts.Passive
 
         public abstract void AdditionalEffect();
 
+        public Sprite GetSprite()
+        {
+            return sprite;
+        }
     }
 }

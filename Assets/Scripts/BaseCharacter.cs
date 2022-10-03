@@ -198,6 +198,11 @@ public class BaseCharacter : MonoBehaviour
 
     }
 
+    public Sprite GetPassiveSprite()
+    {
+        return actualPassive.GetSprite();
+    }
+
     void Attack(bool isHeavy = false)
     {
         // Animator

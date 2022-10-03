@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Passive
 {
@@ -11,6 +7,7 @@ namespace Assets.Scripts.Passive
         public DoubleJumpPassive()
         {
             CanDoubleJump = true;
+            sprite = Resources.Load<Sprite>("Passif/p_jump");
         }
 
         public override void AdditionalEffect()

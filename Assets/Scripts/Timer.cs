@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Timer : MonoBehaviour
     [SerializeField] private GameObject m_Parent;
     [SerializeField] private GameObject m_Segment;
     [SerializeField] private GameObject m_BaseCharacter;
+
+    [Header("Passive Display")]
+    [SerializeField] private GameObject m_PassiveDisplayer;
 
     private List<TimerPosition> segmentList;
 
@@ -26,6 +30,9 @@ public class Timer : MonoBehaviour
             InstanciateSegment(i, false);
             InstanciateSegment(i, true);
         }
+
+        m_BaseCharacter.GetComponent<BaseCharacter>().ChangePassive();
+        DisplayPassive();
 
         InvokeRepeating(nameof(Pulse), 0f, 1f);
     }
@@ -73,10 +80,24 @@ public class Timer : MonoBehaviour
             if (m_BaseCharacter)
             {
                 m_BaseCharacter.GetComponent<BaseCharacter>().ChangePassive();
+
+                DisplayPassive();
             }
         }
 
         m_SegmentNumber--;
+    }
+
+    void DisplayPassive()
+    {
+        var sprite = m_BaseCharacter.GetComponent<BaseCharacter>().GetPassiveSprite();
+
+        if (m_PassiveDisplayer)
+        {
+           var image = m_PassiveDisplayer.GetComponent<Image>();
+           image.sprite = sprite;
+        }
+           
     }
 
     private struct TimerPosition
