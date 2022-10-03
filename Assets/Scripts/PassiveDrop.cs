@@ -20,7 +20,7 @@ public class PassiveDrop : MonoBehaviour
         
         passivesPool = new List<Passive>()
         {
-            new DoubleJumpPassive(), new SpeedPassive(), new DamagePassive()
+            new DoubleJumpPassive(), new SpeedPassive(), new DamagePassive(), new ShieldPassive()
         };
 
         passive = passivesPool[UnityEngine.Random.Range(0, passivesPool.Count)];

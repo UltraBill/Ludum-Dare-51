@@ -207,12 +207,14 @@ public class BaseBoss : MonoBehaviour
 
     public void ChangePassive()
     {
-        int r = UnityEngine.Random.Range(0, passivePool.Count);
+        if (passivePool != null && passivePool.Any())
+        {
+            int r = UnityEngine.Random.Range(0, passivePool.Count);
 
-        actualPassive = passivePool[r];
+            actualPassive = passivePool[r];
 
-        UpdateVariables();
-
+            UpdateVariables();
+        }
     }
 
     private void OnDrawGizmos()

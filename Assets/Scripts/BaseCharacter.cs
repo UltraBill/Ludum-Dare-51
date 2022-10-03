@@ -15,7 +15,7 @@ public class BaseCharacter : MonoBehaviour
   
     public const int b_damage = 2;
     public const int b_heavyDamageMultiplicator = 2;
-    public const int b_armorPoint = 150;
+    public const int b_armorPoint = 2;
     public const float b_range = 4;
     public const float b_areaOfEffectSize = 0;
     public const float b_criticalChance = 0.1f;
@@ -178,6 +178,7 @@ public class BaseCharacter : MonoBehaviour
         movementSpeed = actualPassive.MovementSpeed ?? b_movementSpeed;
         maxDashNumber = actualPassive.MaxDashNumber ?? b_maxDashNumber;
         canDoubleJump = actualPassive.CanDoubleJump ?? b_canDoubleJump;
+        armorPoint = actualPassive.ArmorPoint ?? b_armorPoint;
 
         damage = actualPassive.Damage ?? b_damage;
         heavyDamageMultiplicator = actualPassive.HeavyDamageMultiplicator ?? b_heavyDamageMultiplicator;

@@ -10,6 +10,10 @@ public class GameMasterScript : MonoBehaviour
     public EnemyWaveManager m_manager;
     public TMP_Text m_text;
     public int level;
+    public GameObject player;
+    public Canvas deadScreen;
+
+    private bool gameFinished = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,9 +25,16 @@ public class GameMasterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") || (Input.GetButtonDown("Submit") && gameFinished))
         {
             SceneManager.LoadScene("SceneMenu");
+        }
+
+        if (player.GetComponent<BaseCharacter>().isDead)
+        {
+            deadScreen.gameObject.SetActive(true);
+
+            gameFinished = true;
         }
     }
 

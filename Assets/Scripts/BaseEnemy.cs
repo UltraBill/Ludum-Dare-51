@@ -6,7 +6,7 @@ public class BaseEnemy : MonoBehaviour
 {
     [Header("Base Attribute")]
     [SerializeField] private int maxLifePoint = 10;
-    [SerializeField] private float m_MoveSpeed = 5;
+    [SerializeField] private float m_MoveSpeed = 6f;
     private int actualLifePoint;
 
     [Header("Player Detection")]
