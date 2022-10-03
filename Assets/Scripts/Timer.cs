@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private GameObject m_Parent;
     [SerializeField] private GameObject m_Segment;
     [SerializeField] private GameObject m_BaseCharacter;
+    [SerializeField] private GameObject m_BaseBoss;
 
     private List<TimerPosition> segmentList;
 
@@ -73,6 +74,10 @@ public class Timer : MonoBehaviour
             if (m_BaseCharacter)
             {
                 m_BaseCharacter.GetComponent<BaseCharacter>().ChangePassive();
+            }
+            if (m_BaseBoss)
+            {
+                m_BaseBoss.GetComponent<BaseBoss>().ChangePassive();
             }
         }
 
