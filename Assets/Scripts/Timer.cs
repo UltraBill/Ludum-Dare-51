@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+public class Timer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Animator m_Animator;
 
@@ -15,6 +16,7 @@ public class Timer : MonoBehaviour
 
     [Header("Passive Display")]
     [SerializeField] private GameObject m_PassiveDisplayer;
+    [SerializeField] private GameObject m_TooltipObject;
 
     private List<TimerPosition> segmentList;
 
@@ -90,7 +92,7 @@ public class Timer : MonoBehaviour
 
     void DisplayPassive()
     {
-        var sprite = m_BaseCharacter.GetComponent<BaseCharacter>().GetPassiveSprite();
+        var sprite = m_BaseCharacter.GetComponent<BaseCharacter>().GetPassive().sprite;
 
         if (m_PassiveDisplayer)
         {
@@ -109,6 +111,32 @@ public class Timer : MonoBehaviour
         {
             this.timerSegment = timerSegment;
             this.position = position;
+        }
+    }
+
+    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+    {
+        if (!m_TooltipObject)
+            return;
+
+        Tooltip tt = m_TooltipObject.GetComponent<Tooltip>();
+
+        if (tt)
+        {
+            tt.Hide();
+        }
+    }
+
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+    {
+        if (!m_TooltipObject)
+            return;
+
+        Tooltip tt = m_TooltipObject.GetComponent<Tooltip>();
+
+        if (tt)
+        {
+            tt.Show(m_BaseCharacter.GetComponent<BaseCharacter>().GetPassive());
         }
     }
 }

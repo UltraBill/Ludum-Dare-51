@@ -4,7 +4,10 @@ namespace Assets.Scripts.Passive
 {
     public abstract class Passive
     {
-        protected Sprite sprite;
+        public Sprite sprite;
+
+        public string name;
+        public string description;
 
         public uint? MaxLifePoint { get; internal set; }
         public float? MovementSpeed { get; internal set; }

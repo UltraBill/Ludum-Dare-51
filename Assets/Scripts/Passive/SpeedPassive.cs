@@ -8,6 +8,9 @@ namespace Assets.Scripts.Passive
         {
             MovementSpeed = 10f;
             sprite = Resources.Load<Sprite>("Passif/p_speed");
+
+            name = "Speed Boost";
+            description = "Augment your Speed";
         }
 
         public override void AdditionalEffect()

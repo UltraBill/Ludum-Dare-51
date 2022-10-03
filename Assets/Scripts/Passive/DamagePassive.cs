@@ -6,8 +6,11 @@ namespace Assets.Scripts.Passive
     {
         public DamagePassive()
         {
-            Damage = 10;
+            Damage = 2;
             sprite = Resources.Load<Sprite>("Passif/p_strength");
+
+            name = "Strength";
+            description = "Double your damages";
         }
 
         public override void AdditionalEffect()

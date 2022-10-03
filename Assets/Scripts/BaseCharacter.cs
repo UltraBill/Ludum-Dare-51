@@ -198,9 +198,9 @@ public class BaseCharacter : MonoBehaviour
 
     }
 
-    public Sprite GetPassiveSprite()
+    public Passive GetPassive()
     {
-        return actualPassive.GetSprite();
+        return actualPassive;
     }
 
     void Attack(bool isHeavy = false)
@@ -222,6 +222,14 @@ public class BaseCharacter : MonoBehaviour
             enemy.GetComponent<BaseEnemy>()?.TakeDamage((int)damage * (isHeavy ? 2 : 1));
         }
     }
+
+    public void AddPassivePool(Passive passive)
+    {
+        passivePool.Add(passive);
+
+        Debug.Log(passivePool.Count);
+    }
+
 
     public void Damage()
     {

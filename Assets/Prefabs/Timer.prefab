@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4087891967289910687}
   - component: {fileID: 1583711092538130682}
   m_Layer: 5
-  m_Name: PassiveDisplayer
+  m_Name: PassiveIconDisplayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fc15c6b2ca212f54cb75f26b6d4316d4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f076a8daba1c96d4cb28173225ae7dac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -191,3 +191,4 @@ MonoBehaviour:
   m_Segment: {fileID: 3963589705928213317, guid: d7c196fd5c7b4a9479b91f815797a150, type: 3}
   m_BaseCharacter: {fileID: 0}
   m_PassiveDisplayer: {fileID: 4023416358869565298}
+  m_TooltipObject: {fileID: 0}
