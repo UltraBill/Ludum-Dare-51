@@ -48,7 +48,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 2946268359332706027, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_Name
-      value: BasicBoss
+      value: BasicBoss Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946268359332706027, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
+      propertyPath: m_TagString
+      value: Bossu
       objectReference: {fileID: 0}
     - target: {fileID: 2946268359332706028, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}
       propertyPath: m_Mass
@@ -168,6 +172,7 @@ MonoBehaviour:
   m_attackChargeTime: 0.5
   m_HitPoint: {fileID: 7867177146275489760}
   m_HitRadius: 0.7
+  m_reward: {fileID: 1201565102383015663, guid: 2cb6dc5dbfa03074c8a64ae3234ed34c, type: 3}
 --- !u!4 &7867177146275489760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4975393845932777372, guid: 5cd41455dbcb2104d90b1d0296041c02, type: 3}

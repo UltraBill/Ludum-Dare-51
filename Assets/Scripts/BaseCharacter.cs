@@ -15,7 +15,7 @@ public class BaseCharacter : MonoBehaviour
   
     public const int b_damage = 2;
     public const int b_heavyDamageMultiplicator = 2;
-    public const int b_armorPoint = 2;
+    public const int b_armorPoint = 150;
     public const float b_range = 4;
     public const float b_areaOfEffectSize = 0;
     public const float b_criticalChance = 0.1f;

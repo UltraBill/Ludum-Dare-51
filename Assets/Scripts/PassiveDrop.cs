@@ -17,6 +17,7 @@ public class PassiveDrop : MonoBehaviour
 
     void Start()
     {
+        
         passivesPool = new List<Passive>()
         {
             new DoubleJumpPassive(), new SpeedPassive(), new DamagePassive()
@@ -29,14 +30,7 @@ public class PassiveDrop : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Submit") && canPickup && player)
-        {
-            player.GetComponent<BaseCharacter>().AddPassivePool(passive);
-
-            this.gameObject.SetActive(false);
-
-            Destroy(this);
-        }
+        submit();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -71,6 +65,18 @@ public class PassiveDrop : MonoBehaviour
             {
                 tt.Hide();
             }
+        }
+    }
+
+    protected virtual void submit()
+    {
+        if (Input.GetButton("Submit") && canPickup && player)
+        {
+            player.GetComponent<BaseCharacter>().AddPassivePool(passive);
+
+            this.gameObject.SetActive(false);
+
+            //Destroy(this);
         }
     }
 }
