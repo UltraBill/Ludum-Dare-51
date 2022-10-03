@@ -401,6 +401,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicBoss Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1251800988427909676, guid: 58a6a4207d915734e80fe5db5dfb05e9, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5762492
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251800988427909676, guid: 58a6a4207d915734e80fe5db5dfb05e9, type: 3}
+      propertyPath: m_Color.g
+      value: 0.23113209
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251800988427909676, guid: 58a6a4207d915734e80fe5db5dfb05e9, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251800988427909676, guid: 58a6a4207d915734e80fe5db5dfb05e9, type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251800988427909676, guid: 58a6a4207d915734e80fe5db5dfb05e9, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 0.19666535
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251800988427909676, guid: 58a6a4207d915734e80fe5db5dfb05e9, type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 1.0305259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454394329402736721, guid: 58a6a4207d915734e80fe5db5dfb05e9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.49004543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454394329402736721, guid: 58a6a4207d915734e80fe5db5dfb05e9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.87169695
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58a6a4207d915734e80fe5db5dfb05e9, type: 3}
 --- !u!1 &503665881
@@ -1730,18 +1762,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 585101293}
-    - target: {fileID: 6474966687612172733, guid: 519d11d44a389534090b2059d3347956, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.98
-      objectReference: {fileID: 0}
     - target: {fileID: 6474966689358366724, guid: 519d11d44a389534090b2059d3347956, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1279101968}
-    - target: {fileID: 6474966689358366724, guid: 519d11d44a389534090b2059d3347956, type: 3}
-      propertyPath: boundmax
-      value: 274
-      objectReference: {fileID: 0}
     - target: {fileID: 6474966689358366725, guid: 519d11d44a389534090b2059d3347956, type: 3}
       propertyPath: m_RootOrder
       value: 7

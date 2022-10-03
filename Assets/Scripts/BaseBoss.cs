@@ -144,7 +144,7 @@ public class BaseBoss : MonoBehaviour
 
                 m_Rigidbody2D.velocity = new Vector2(direction.x * speed, m_Rigidbody2D.velocity.y);
 
-                if (Mathf.Abs(direction.y) >  0.3f && jumpcount > 0)
+                if (Mathf.Abs(direction.y) >  0.5f && jumpcount > 0)
                 {
                     m_Rigidbody2D.AddForce(Vector2.up * 30f, ForceMode2D.Impulse);
                     jumpcount--;
